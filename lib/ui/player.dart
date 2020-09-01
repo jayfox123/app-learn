@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_ijkplayer/flutter_ijkplayer.dart';
 
+
+
 class player extends StatefulWidget {
   String link;
-  player(this.link);
+  player({this.link});
 
   @override
   _playerState createState() {

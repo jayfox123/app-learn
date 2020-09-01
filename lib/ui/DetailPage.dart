@@ -658,7 +658,7 @@ class _DetailPageState extends State<DetailPage> {
               } else {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => player(photo)),
+                  MaterialPageRoute(builder: (context) => player(link:photo)),
                 );
               }
             },
