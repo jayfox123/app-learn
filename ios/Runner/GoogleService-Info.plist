@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>715716004409-vj3ilsq0ejnvd4uau3onq10e4ofihijo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.715716004409-vj3ilsq0ejnvd4uau3onq10e4ofihijo</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>715716004409-qpbutj9k58lrh8eghrkv8frq84gf0jo9.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyC_TTg3QBq8L4oj5xgopg8RRYLnu_kGSy0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>715716004409</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.rowad.rowadacademy</string>
+	<key>PROJECT_ID</key>
+	<string>rouwad-academy</string>
+	<key>STORAGE_BUCKET</key>
+	<string>rouwad-academy.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:715716004409:ios:6a0ba0733679ca6dbe1be8</string>
+	<key>DATABASE_URL</key>
+	<string>https://rouwad-academy.firebaseio.com</string>
+</dict>
+</plist>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "715716004409",
+    "firebase_url": "https://rouwad-academy.firebaseio.com",
+    "project_id": "rouwad-academy",
+    "storage_bucket": "rouwad-academy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715716004409:android:08e2c1174130e418be1be8",
+        "android_client_info": {
+          "package_name": "com.rowad.rowadacademy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715716004409-qpbutj9k58lrh8eghrkv8frq84gf0jo9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rowad.rowadacademy",
+            "certificate_hash": "c32e76435dad51344a27f672e68d27c03c7feb4f"
+          }
+        },
+        {
+          "client_id": "715716004409-ja7rd7i5u1foh8dpvt2l54m4k5hcb1pa.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC1rsMZnZxKjTUgvBcL3Nugnn91wUAI09c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715716004409-ja7rd7i5u1foh8dpvt2l54m4k5hcb1pa.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
