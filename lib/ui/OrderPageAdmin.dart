@@ -219,7 +219,6 @@ class _OrderPageAdminState extends State<OrderPageAdmin> {
                               onPressed: () async {
                                 Navigator.pop(context);
                               }),
-                         
                         ),
                       ],
                     ),
@@ -358,9 +357,6 @@ class _OrderPageAdminState extends State<OrderPageAdmin> {
                 ),
               ],
             ),
-
-          
-
             StreamBuilder(
               stream: FirebaseDatabase.instance
                   .reference()
@@ -437,7 +433,6 @@ class _OrderPageAdminState extends State<OrderPageAdmin> {
             ),
           ],
         ),
-
         resizeToAvoidBottomInset: true,
       ),
     );
@@ -585,125 +580,128 @@ class _OrderPageAdminState extends State<OrderPageAdmin> {
       }
     });
     return Padding(
-        padding: EdgeInsets.only(top: 2.0, bottom: 2.0, left: 4.0, right: 4.0),
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: 140,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: Colors.grey[300],
-                  boxShadow: [
-                    BoxShadow(
-                        blurRadius: 8,
-                        color: Colors.grey[300],
-                        spreadRadius: 1,
-                        offset: Offset(8, 8))
-                  ],
-                  image: DecorationImage(
-                      image: NetworkImage(photo), fit: BoxFit.cover)),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        Container(
-                          padding: EdgeInsets.fromLTRB(5, 3, 5, 3),
-                          decoration: BoxDecoration(
-                              color: Colors.black.withOpacity(0.3),
-                              borderRadius: BorderRadius.only(
-                                  bottomRight: Radius.circular(5),
-                                  topLeft: Radius.circular(5),
-                                  bottomLeft: Radius.circular(5),
-                                  topRight: Radius.circular(5))),
-                          child: Text(
-                            name,
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+      padding: EdgeInsets.only(top: 2.0, bottom: 2.0, left: 4.0, right: 4.0),
+      child: Column(
+        children: <Widget>[
+          Container(
+            height: 140,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+                color: Colors.grey[300],
+                boxShadow: [
+                  BoxShadow(
+                      blurRadius: 8,
+                      color: Colors.grey[300],
+                      spreadRadius: 1,
+                      offset: Offset(8, 8))
                 ],
-              ),
+                image: DecorationImage(
+                    image: NetworkImage(photo), fit: BoxFit.cover)),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.fromLTRB(5, 3, 5, 3),
+                        decoration: BoxDecoration(
+                            color: Colors.black.withOpacity(0.3),
+                            borderRadius: BorderRadius.only(
+                                bottomRight: Radius.circular(5),
+                                topLeft: Radius.circular(5),
+                                bottomLeft: Radius.circular(5),
+                                topRight: Radius.circular(5))),
+                        child: Text(
+                          name,
+                          style: TextStyle(
+                              fontSize: 16,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
             ),
-            isEntered
-                ? Padding(
-                    padding: EdgeInsets.all(10),
-                    child: MaterialButton(
-                      onPressed: () async {
-                        var now = formatDate(new DateTime.now(),
-                            [yyyy, '-', mm, '-', dd, ', ', hh, ':', mm]);
-                        FirebaseDatabase.instance
-                            .reference()
-                            .child('activation')
-                            .child(uid)
-                            .child(id)
-                            .set({
-                          'id_course': id,
-                        }).then((_) {
-                          setState(() {
-                            Course_Uid.add(id);
-                          });
-                        });
-                      },
-                      child: Text(
-                        'تفعيل ',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      color: Colors.teal,
-                      elevation: 0,
-                      minWidth: 100,
-                      height: 30,
-                      textColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),),
-                    ),
-                  )
-                : Padding(
-                    padding: EdgeInsets.all(10),
-                    child: MaterialButton(
-                      onPressed: () async {
-                        var now = formatDate(new DateTime.now(),
-                            [yyyy, '-', mm, '-', dd, ', ', hh, ':', mm]);
-                        FirebaseDatabase.instance
-                            .reference()
-                            .child('activation')
-                            .child(uid)
-                            .child(id)
-                            .remove();
-
+          ),
+          isEntered
+              ? Padding(
+                  padding: EdgeInsets.all(10),
+                  child: MaterialButton(
+                    onPressed: () async {
+                      var now = formatDate(new DateTime.now(),
+                          [yyyy, '-', mm, '-', dd, ', ', hh, ':', mm]);
+                      await FirebaseDatabase.instance
+                          .reference()
+                          .child('activation')
+                          .child(uid)
+                          .child(id)
+                          .set({
+                        'id_course': id,
+                      }).then((_) {
                         setState(() {
-                          Course_Uid.remove(id);
+                          Course_Uid.add(id);
                         });
-                      },
-                      child: Text(
-                        'الغاء ',
-                        style: TextStyle(
-                          fontSize: 13,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      });
+                    },
+                    child: Text(
+                      'تفعيل ',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
                       ),
-                      color: Colors.redAccent,
-                      elevation: 0,
-                      minWidth: 100,
-                      height: 30,
-                      textColor: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10)),
+                    ),
+                    color: Colors.teal,
+                    elevation: 0,
+                    minWidth: 100,
+                    height: 30,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-          ],
-        ));
+                )
+              : Padding(
+                  padding: EdgeInsets.all(10),
+                  child: MaterialButton(
+                    onPressed: () async {
+                      var now = formatDate(new DateTime.now(),
+                          [yyyy, '-', mm, '-', dd, ', ', hh, ':', mm]);
+                      FirebaseDatabase.instance
+                          .reference()
+                          .child('activation')
+                          .child(uid)
+                          .child(id)
+                          .remove();
+
+                      setState(() {
+                        Course_Uid.remove(id);
+                      });
+                    },
+                    child: Text(
+                      'الغاء ',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    color: Colors.redAccent,
+                    elevation: 0,
+                    minWidth: 100,
+                    height: 30,
+                    textColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                  ),
+                ),
+        ],
+      ),
+    );
   }
 
   String uid;
@@ -801,18 +799,19 @@ class _OrderPageAdminState extends State<OrderPageAdmin> {
             children: <Widget>[
               /// [Review] Button
               buttonBlue(
-                  txt: "معاينة",
-                  onTap: () {
-                    setState(() {
-                      uid = id;
-                      displayName = username;
-                    });
-                    itemsCourse.clear();
+                txt: "معاينة",
+                onTap: () {
+                  setState(() {
+                    uid = id;
+                    displayName = username;
+                  });
+                  itemsCourse.clear();
 
-                    getInformation(uid);
-                    _showModalBottomSheet(context);
-                  },
-                  isRad: true,),
+                  getInformation(uid);
+                  _showModalBottomSheet(context);
+                },
+                isRad: true,
+              ),
 
               SizedBox(
                 height: 10,
@@ -875,7 +874,6 @@ class _OrderPageAdminState extends State<OrderPageAdmin> {
     );
   }
 
-  
   Widget buildPending(int position, String id, String username, String tel,
       String address, String status, String photo, context) {
     return Padding(
@@ -1178,8 +1176,8 @@ class _OrderPageAdminState extends State<OrderPageAdmin> {
   void _onStudentAddedActive(Event event) {
     if (event.snapshot.value["status"] == "0") {
       setState(() {
-        items.add(new Student.fromSnapShot(event.snapshot));
-        initial.add(new Student.fromSnapShot(event.snapshot));
+        items.add(Student.fromSnapShot(event.snapshot));
+        initial.add(Student.fromSnapShot(event.snapshot));
       });
     }
   }

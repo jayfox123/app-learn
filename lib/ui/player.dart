@@ -26,21 +26,28 @@ class _playerState extends State<player> {
   }
 
   @override
-  void initState() {
+  void initState() async{
     super.initState();
+    await initVideo();
+  }
+  void initVideo() async{
     Map<String, String> headers = {
       "Content-Type": "application/json",
       "Accept": "application/json",
     };
     print(link);
-    controller.setNetworkDataSource(
+    try{
+      await controller.setNetworkDataSource(
       link, autoPlay: true,
-      // headers: headers
     );
+    }catch(r){
+      print( r );
+    }
     controller.needChangeSpeed = true;
 
     controller.autoRotate = true;
   }
+      // headers: headers
 
   Widget buildIjkPlayer() {
     return Container(

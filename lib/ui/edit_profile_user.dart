@@ -254,12 +254,7 @@ class _EditProfileUserState extends State<EditProfileUser>
           SizedBox(
             height: 10,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Column(
-                mainAxisSize: MainAxisSize.max,
-                children: [
+          
                   Text(
                     'الهاتف',
                     style: TextStyle(
@@ -267,9 +262,7 @@ class _EditProfileUserState extends State<EditProfileUser>
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(
-                    width: size.width * 0.35,
-                    child: Container(
+                     Container(
                       height: 45,
                       padding: EdgeInsets.only(top: 20, right: 20),
                       decoration: BoxDecoration(
@@ -283,7 +276,7 @@ class _EditProfileUserState extends State<EditProfileUser>
                         ],
                       ),
                       child: TextField(
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.right,
                         keyboardType: TextInputType.phone,
                         controller: _mobileController,
                         decoration: InputDecoration(
@@ -292,19 +285,16 @@ class _EditProfileUserState extends State<EditProfileUser>
                         ),
                       ),
                     ),
-                  ),
-                ],
-              ),
-              //-------------------
-              Column(
-                children: [
+
+      SizedBox( height: 10 ),
+        
                   Text(
                     'العنوان',
                     style:
                         TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
-                    width: size.width * 0.35,
+                    width: size.width * 0.55,
                     child: Container(
                       height: 45,
                       padding: EdgeInsets.only(top: 20, right: 20),
@@ -319,7 +309,7 @@ class _EditProfileUserState extends State<EditProfileUser>
                         ],
                       ),
                       child: TextField(
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.right,
                         keyboardType: TextInputType.emailAddress,
                         controller: _pointsController,
                         decoration: InputDecoration(
@@ -329,10 +319,9 @@ class _EditProfileUserState extends State<EditProfileUser>
                       ),
                     ),
                   ),
-                ],
-              ),
-            ],
-          ),
+
+                  
+                  // ),
 
           SizedBox(
             height: 30,

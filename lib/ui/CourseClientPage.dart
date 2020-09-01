@@ -32,7 +32,7 @@ class _CourseClientPageState extends State<CourseClientPage> {
   List<UserX> allUserSub = [];
 
   @override
-  void initState() {
+  void initState(){
    try{
       _initGetSubcripUsers();
   //   _initcurrentRole();
@@ -224,17 +224,15 @@ class _CourseClientPageState extends State<CourseClientPage> {
   }
 
   void _initGetSubcripUsers()  {
-    // print( idSemestre );
      getAllUsers().then((user) async {
       for (var i in user) {
-        print("------------------");
         await getSubscripCourse(idSemestre, i.uid).then((value) async {
           if (value == true) {
             await getOneUser(i.uid).then((valueUser) {
               allUserSub.add(valueUser);
             });
           } else {
-            print("Not Subscrip User ${i.uid}");
+            print("Not Subscrip User");
           }
         });
       }
@@ -269,7 +267,6 @@ class _CourseClientPageState extends State<CourseClientPage> {
         Map<dynamic, dynamic> osp = snapshot.value;
         for (var i in osp.keys) {
           if (i == courseId) {
-            print(i);
             isFound = true;
             break;
           } else {
@@ -288,12 +285,10 @@ class _CourseClientPageState extends State<CourseClientPage> {
     await FirebaseDatabase.instance
         .reference()
         .child("users")
-        // .child("uid")
         .once()
         .then((DataSnapshot snapshot) {
       Map<dynamic, dynamic> valuesx = snapshot.value;
       valuesx.forEach((key, value) {
-        // print("Key => $key");
         allUsers.add(
           Users(
             uid: key,
@@ -375,7 +370,6 @@ class _CourseClientPageState extends State<CourseClientPage> {
   }
 
   _showModalBottomSheet() {
-    _initGetSubcripUsers();
     return showModalBottomSheet(
       elevation: 1,
       isScrollControlled: true,
@@ -450,6 +444,7 @@ class _CourseClientPageState extends State<CourseClientPage> {
                     width: 60,
                     height: 60,
                     decoration: BoxDecoration(
+                      color: Colors.red,
                       boxShadow: [
                         BoxShadow(
                           color: Colors.teal.withOpacity(0.2),
@@ -458,10 +453,11 @@ class _CourseClientPageState extends State<CourseClientPage> {
                       ],
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: NetworkImage(userInfo.photoUrl),
+                        image: NetworkImage( userInfo.photoUrl == null ? "": userInfo.photoUrl ),
                         fit: BoxFit.fitHeight,
                       ),
                     ),
+                    child: userInfo.photoUrl == null ? Center(child: Text("not Image", style: TextStyle(color: Colors.white, fontSize:10),)) : Text(""),
                   ),
                   SizedBox(width: 15),
                   Text(

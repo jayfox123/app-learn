@@ -389,7 +389,7 @@ class _HomePageState extends State<HomePage>
                       MaterialPageRoute(builder: (context) => ProfilePage()),
                     );
                   },
-                  txt: "الملف الشخصي",
+                  txt: "  الملف الشخصي",
                   icon: Icon(Icons.person, color: Colors.white),
                 ),
 
@@ -447,7 +447,7 @@ class _HomePageState extends State<HomePage>
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           SizedBox(
-            width: 10,
+            width: 15,
           ),
           icon
         ],
@@ -666,7 +666,6 @@ class _HomePageState extends State<HomePage>
 
   List Course_Uid = List();
   Future<bool> Subscribed(String id) async {
-    print(uid);
     bool subs = false;
     Course_Uid.clear();
     await FirebaseDatabase.instance
