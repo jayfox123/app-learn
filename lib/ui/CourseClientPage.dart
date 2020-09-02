@@ -32,13 +32,13 @@ class _CourseClientPageState extends State<CourseClientPage> {
   List<UserX> allUserSub = [];
 
   @override
-  void initState(){
-   try{
+  void initState() {
+    try {
       _initGetSubcripUsers();
-  //   _initcurrentRole();
-   }catch(r){
-     print( "Shme" + r );
-   }
+      //   _initcurrentRole();
+    } catch (r) {
+      print("Shme" + r);
+    }
     super.initState();
     _nameController = TextEditingController();
     items = List();
@@ -81,7 +81,7 @@ class _CourseClientPageState extends State<CourseClientPage> {
   //         //   if (data["rolus"] == "admin") {
   //         //       isAdmin = true;
   //         //       print( data["rolus"] );
-              
+
   //         //   } else {
   //         //     print( data["rolus"] );
   //         //     isAdmin = false;
@@ -112,11 +112,10 @@ class _CourseClientPageState extends State<CourseClientPage> {
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         actions: [
-           IconButton( 
-                  icon: Icon(Icons.remove_red_eye),
-                  onPressed: _showModalBottomSheet,
-                ),
-          
+          IconButton(
+            icon: Icon(Icons.remove_red_eye),
+            onPressed: _showModalBottomSheet,
+          ),
         ],
       ),
       body: StreamBuilder(
@@ -223,13 +222,15 @@ class _CourseClientPageState extends State<CourseClientPage> {
     );
   }
 
-  void _initGetSubcripUsers()  {
-     getAllUsers().then((user) async {
+  void _initGetSubcripUsers() {
+    getAllUsers().then((user) {
       for (var i in user) {
-        await getSubscripCourse(idSemestre, i.uid).then((value) async {
+        getSubscripCourse(idSemestre, i.uid).then((value) {
           if (value == true) {
-            await getOneUser(i.uid).then((valueUser) {
-              allUserSub.add(valueUser);
+            getOneUser(i.uid).then((valueUser) {
+             setState(() {
+                allUserSub.add(valueUser);
+             });
             });
           } else {
             print("Not Subscrip User");
@@ -380,6 +381,23 @@ class _CourseClientPageState extends State<CourseClientPage> {
     );
   }
 
+  Future<UserX> _getSubcripUsers() {
+    getAllUsers().then((user) async {
+      for (var i in user) {
+        await getSubscripCourse(idSemestre, i.uid).then((value) async {
+          if (value == true) {
+            await getOneUser(i.uid).then((valueUser) {
+              // allUserSub.add(valueUser);
+              return valueUser;
+            });
+          } else {
+            print("Not Subscrip User");
+          }
+        });
+      }
+    });
+  }
+
   Widget containerCustom() {
     return Container(
       height: 320,
@@ -405,16 +423,45 @@ class _CourseClientPageState extends State<CourseClientPage> {
             ),
 
             /// [List] Custom
-            Container(
-              child: ListView.builder(
-                physics: ClampingScrollPhysics(),
-                itemCount: allUserSub.length,
-                shrinkWrap: true,
-                itemBuilder: (context, int index) {
-                  return _customSubcript(allUserSub[index]);
-                },
-              ),
-            ),
+            
+                allUserSub.length <= 1 ? Container(
+                  child: Center(
+                    child: Text("جاري التحميل"),
+                  )
+                ) : Container(
+                    child: ListView.builder(
+                      physics: ClampingScrollPhysics(),
+                      itemCount: allUserSub.length,
+                      shrinkWrap: true,
+                      itemBuilder: (context, int index) {
+                        return _customSubcript(allUserSub[index]);
+                      },
+                    ),
+                  )
+                // : FutureBuilder<UserX>(
+                //     future: _getSubcripUsers(),
+                //     builder: (context, snapshot) {
+                //       if (snapshot.hasError) {
+                //         print(snapshot.error);
+                //       }
+                //       switch (snapshot.connectionState) {
+                //         case ConnectionState.waiting:
+                //           return Center(child: Text("جاري التحميل"));
+                //         case ConnectionState.done:
+                //         return Text(snapshot.data.displayName);
+                //           // return Container(
+                //           //     child: ListView.builder(
+                //           //   physics: ClampingScrollPhysics(),
+                //           //   itemCount: allUserSub.length,
+                //           //   shrinkWrap: true,
+                //           //   itemBuilder: (context, int index) {
+                //           //     return _customSubcript(allUserSub[index]);
+                //           //   },
+                //           // )
+                //         // );
+                //       }
+                //     },
+                //   )
           ],
         ),
       ),
@@ -425,19 +472,13 @@ class _CourseClientPageState extends State<CourseClientPage> {
     return Expanded(
       child: Container(
         margin: EdgeInsets.symmetric(horizontal: 10, vertical: 6),
-        padding: EdgeInsets.symmetric(horizontal: 16,vertical: 7),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.teal.withOpacity(0.2),
-              blurRadius: 8
-            )
-          ]
-        ),
+        padding: EdgeInsets.symmetric(horizontal: 16, vertical: 7),
+        decoration: BoxDecoration(color: Colors.white, boxShadow: [
+          BoxShadow(color: Colors.teal.withOpacity(0.2), blurRadius: 8)
+        ]),
         child: Column(
           children: [
-            Container(  
+            Container(
               child: Row(
                 children: [
                   Container(
@@ -447,17 +488,22 @@ class _CourseClientPageState extends State<CourseClientPage> {
                       color: Colors.red,
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.teal.withOpacity(0.2),
-                          blurRadius: 4
-                        ),
+                            color: Colors.teal.withOpacity(0.2), blurRadius: 4),
                       ],
                       shape: BoxShape.circle,
                       image: DecorationImage(
-                        image: NetworkImage( userInfo.photoUrl == null ? "": userInfo.photoUrl ),
+                        image: NetworkImage(
+                            userInfo.photoUrl == null ? "" : userInfo.photoUrl),
                         fit: BoxFit.fitHeight,
                       ),
                     ),
-                    child: userInfo.photoUrl == null ? Center(child: Text("not Image", style: TextStyle(color: Colors.white, fontSize:10),)) : Text(""),
+                    child: userInfo.photoUrl == null
+                        ? Center(
+                            child: Text(
+                            "not Image",
+                            style: TextStyle(color: Colors.white, fontSize: 10),
+                          ))
+                        : Text(""),
                   ),
                   SizedBox(width: 15),
                   Text(

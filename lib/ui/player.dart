@@ -26,18 +26,18 @@ class _playerState extends State<player> {
   }
 
   @override
-  void initState() async{
+  void initState() {
     super.initState();
-    await initVideo();
+    initVideo();
   }
-  void initVideo() async{
+  void initVideo() {
     Map<String, String> headers = {
       "Content-Type": "application/json",
       "Accept": "application/json",
     };
     print(link);
     try{
-      await controller.setNetworkDataSource(
+      controller.setNetworkDataSource(
       link, autoPlay: true,
     );
     }catch(r){
